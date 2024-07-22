@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DocumentService {
     private final FileUploader fileUploader;
-    private final Pipe pipe;
+    private final PipeOut pipeOut;
 
-    public DocumentService(FileUploader fileUploader, Pipe pipe) {
+    public DocumentService(FileUploader fileUploader, PipeOut pipeOut) {
         this.fileUploader = fileUploader;
-        this.pipe = pipe;
+        this.pipeOut = pipeOut;
     }
     public boolean createDocument(String filePath) {
-        return fileUploader.upload(filePath) && pipe.process(filePath);
+        return fileUploader.upload(filePath) && pipeOut.process(filePath);
     }
 }

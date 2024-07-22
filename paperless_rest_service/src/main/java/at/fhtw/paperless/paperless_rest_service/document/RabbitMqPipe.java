@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Component
-public class RabbitMqPipe implements Pipe {
+public class RabbitMqPipe implements PipeOut {
     private final static String QUEUE_NAME = "ocr_queue";
     ConnectionFactory connectionFactory;
     public RabbitMqPipe() {
