@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "at.fhtw.paperless"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
 	toolchain {
@@ -22,6 +22,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("io.minio:minio:8.5.11")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.amqp:spring-rabbit-test")
@@ -30,4 +31,13 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+tasks.jar {
+	manifest {
+		attributes(
+			"Main-Class" to "at.fhtw.paperless.paperless_ocr_service.PaperlessOcrServiceApplication"		)
+	}
+}
+tasks.bootJar {
+	// No additional attributes
 }

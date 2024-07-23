@@ -5,6 +5,7 @@ import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.UploadObjectArgs;
 import io.minio.errors.MinioException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,12 +17,10 @@ import java.security.NoSuchAlgorithmException;
 @Component
 public class MinoFileUploader implements FileUploader {
     MinioClient minioClient;
-    public MinoFileUploader() {
-        minioClient =
-                MinioClient.builder()
-                        .endpoint("http://127.0.0.1:9000")
-                        .credentials("myminioaccess", "S3cureP@ssw0rd")
-                        .build();
+
+    @Autowired
+    public MinoFileUploader(MinioClient minioClient) {
+        this.minioClient = minioClient;
     }
     @Override
     public boolean upload(String filePath) {

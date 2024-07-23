@@ -9,11 +9,11 @@ import java.io.File;
 @Service
 public class OCRService {
 
-    public String performOCR(String documentPath) {
+    public String performOCR(File file) {
         Tesseract tesseract = new Tesseract();
         tesseract.setDatapath("/path/to/tessdata"); // Set the path to tessdata directory
         try {
-            return tesseract.doOCR(new File(documentPath));
+            return tesseract.doOCR(file);
         } catch (TesseractException e) {
             return null;
         }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "at.fhtw.paperless"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 
 java {
 	toolchain {
@@ -41,4 +41,13 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+tasks.jar {
+	manifest {
+		attributes(
+			"Main-Class" to "at.fhtw.paperless.paperless_rest_service.PaperlessRestServiceApplication"		)
+	}
+}
+tasks.bootJar {
+	// No additional attributes
 }
