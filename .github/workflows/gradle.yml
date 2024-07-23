@@ -29,6 +29,7 @@ jobs:
 
     - name: Build with Gradle Wrapper
       run: ./paperless_ocr_service/gradlew build
+      working-directory: ./paperless_ocr_service
 
   dependency-submission:
 
