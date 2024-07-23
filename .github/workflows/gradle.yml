@@ -30,12 +30,20 @@ jobs:
     - name: List paperless_ocr_service directory contents
       run: ls -la ./paperless_ocr_service
 
+    - name: Check line endings of gradlew
+      run: |
+        if file ./paperless_ocr_service/gradlew | grep CRLF; then
+          echo "Converting line endings"
+          dos2unix ./paperless_ocr_service/gradlew
+        fi
+
     - name: Grant execute permission for Gradle Wrapper
       run: chmod +x ./paperless_ocr_service/gradlew
 
     - name: Build with Gradle Wrapper
-      run: ./paperless_ocr_service/gradlew build
-      working-directory: ./paperless_ocr_service
+      run: |
+        cd paperless_ocr_service
+        ./gradlew build
 
   dependency-submission:
 
@@ -52,4 +60,4 @@ jobs:
         distribution: 'temurin'
 
     - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 
