@@ -21,6 +21,7 @@ dependencies {
 	implementation("net.sourceforge.tess4j:tess4j:5.12.0")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
+	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("io.minio:minio:8.5.11")
 	compileOnly("org.projectlombok:lombok")

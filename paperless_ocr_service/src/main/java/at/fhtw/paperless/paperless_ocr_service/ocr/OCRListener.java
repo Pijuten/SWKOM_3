@@ -5,6 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Arrays;
 
 @Component
 public class OCRListener {
@@ -22,13 +23,19 @@ public class OCRListener {
         System.out.println("Received message: " + documentName);
         String[] parts = documentName.split("_");
         Long documentId = Long.parseLong(parts[0]);
-        File  file = fileDownloader.download(parts[1]);
-        Document document = new Document(documentId, performOCR(file));
-        ocrService.updateDocument(document);
+        File file = fileDownloader.download(parts[1]);
+        Document document = ocrService.getDocument(documentId);
+        if (document != null) {
+            document.setContent(performOCR(file));
+            ocrService.updateDocument(document);
+        } else {
+            System.out.println(Arrays.toString(parts));
+            System.out.println("Document not found");
+        }
         // Handle the OCR result (e.g., save to database, send to another service)
     }
+
     public String performOCR(File file) {
         return ocrService.performOCR(file);
-
     }
 }
