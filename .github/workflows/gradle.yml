@@ -34,6 +34,11 @@ jobs:
         cd paperless_ocr_service
         ./gradlew build
 
+    - name: List build directory contents
+      run: |
+        cd paperless_ocr_service/build/libs
+        ls -l
+
     - name: Archive build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -53,8 +58,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_TOKEN }}
       with:
-        tag_name: v1.0.0
-        release_name: Release v1.0.0
+        tag_name: v1.0.1 # Incremented the version number
+        release_name: Release v1.0.1
         draft: false
         prerelease: false
 
